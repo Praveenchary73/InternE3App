@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+    <ImageView
+        android:id="@+id/box"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="horizontal"
+        android:layout_margin="30dp"
+        android:padding="10dp"
+        android:background="@drawable/bg_rectangle" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_pic"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@drawable/praveenchary"
+        />
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profile_pic"
+        android:paddingTop="60dp"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:text="@string/username"/>
+    <EditText
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:maxLines="1"
+        android:layout_marginTop="93dp"
+        android:text="Your status here..."
+        android:layout_toRightOf="@id/profile_pic"
+        />
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:elevation="10dp"
+        android:id="@+id/verify_vehicle"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginHorizontal="35dp"
+        android:layout_marginTop="180dp"
+        android:alpha="22"
+        android:clickable="true"
+        android:onClick="ButtonClicked"
+        android:hapticFeedbackEnabled="true"
+        android:src="@drawable/car_w"
+        app:civ_border_color="#44000000"
+        app:civ_border_width="1.5dp"
+        app:civ_fill_color="#cccccc" />
+    <Button
+        android:id="@+id/verify_vehicle_2"
+        android:elevation="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="203dp"
+        android:background="@drawable/bg_rectangle_round"
+        android:gravity="center_vertical"
+        android:hapticFeedbackEnabled="true"
+        android:paddingLeft="19dp"
+        android:text="Verify Vehicle"
+        android:textStyle="bold"
+        android:fontFamily="serif"
+        android:onClick="ButtonClicked"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/send_location"
+        android:elevation="10dp"
+        android:layout_marginTop="261dp"
+        android:layout_marginHorizontal="35dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:civ_border_color="#44000000"
+        app:civ_border_width="1.5dp"
+        android:clickable="true"
+        android:onClick="ButtonClicked"
+        android:src="@drawable/send_location"
+        android:alpha="22"
+        app:civ_fill_color="#cccccc"
+        />
+    <Button
+        android:id="@+id/send_location_2"
+        android:elevation="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="90dp"
+        android:layout_marginTop="284dp"
+        android:text="Send Current Location"
+        android:paddingLeft="19dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_rectangle_round"
+        android:textStyle="bold"
+        android:fontFamily="serif"
+        android:onClick="ButtonClicked"
+        />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/share_location"
+        android:elevation="10dp"
+        android:layout_marginTop="340dp"
+        android:layout_marginHorizontal="35dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:civ_border_color="#44000000"
+        app:civ_border_width="1.5dp"
+        android:clickable="true"
+        android:onClick="ButtonClicked"
+        android:src="@drawable/location_active"
+        android:alpha="22"
+        app:civ_fill_color="#22000000"
+        />
+
+    <Button
+        android:id="@+id/share_location_2"
+        android:layout_width="254dp"
+        android:layout_height="58dp"
+        android:layout_alignBottom="@+id/share_location"
+        android:layout_alignStart="@+id/verify_vehicle_2"
+        android:elevation="10dp"
+        android:fontFamily="serif"
+        android:gravity="center_vertical"
+        android:onClick="ButtonClicked"
+        android:paddingLeft="19dp"
+        android:text="Share Live Location"
+        android:textStyle="bold" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click"
+        android:onClick="ButtonClicked"
+        android:id="@+id/new_button"/>
+
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rectangle"
+        app:menu="@menu/navigation" />
+
+</RelativeLayout>
