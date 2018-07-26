@@ -20,5 +20,9 @@
     <style name="BigFont">
         <item name="android:textSize">44sp</item>
     </style>
+    <style name="AppTheme.FloatingStyle">
+            <item name="android:windowIsTranslucent">true</item>
+            <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
 
 </resources>

@@ -1,6 +1,8 @@
 package com.internship.project.interne3;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,9 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -21,6 +28,9 @@ public class MainActivity extends AppCompatActivity
     BottomNavigationView navigation;
     ImageButton edit_status;
     InputMethodManager myKeyboard;
+    SharedPreferences last_location;
+    SharedPreferences.Editor editor;
+    TextView display_location,display_last_updated;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener()
@@ -86,12 +96,26 @@ public class MainActivity extends AppCompatActivity
         myFragTrans1.replace(R.id.page,fragment1,"");
         myFragTrans1.commit();
         edit_status_enabled=false;
-        navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView)findViewById(R.id.navigation);
         myKeyboard = (InputMethodManager) getSystemService(MainActivity.INPUT_METHOD_SERVICE);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.getMenu().getItem(1).setChecked(true);
+        last_location=getSharedPreferences("last_location",0);
+
+        editor=last_location.edit();
    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        TextView display_last_updated=(TextView)findViewById(R.id.last_updated);
+        TextView display_location=(TextView)findViewById(R.id.location);
+        TextView username = (TextView)findViewById(R.id.username);
+        SharedPreferences last_location=getSharedPreferences("last_location",0);
+        String difference_in_time=HomeFragment.getTimeDifference(last_location.getLong("last_updated",0));
+        display_last_updated.setText(difference_in_time);
+        display_location.setText(last_location.getString("last_location_name","Not Updated"));
+    }
 
     public void ButtonClicked(View view)
     {
@@ -104,7 +128,8 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.send_location:
             case R.id.send_location_2:
-                Toast.makeText(MainActivity.this,"Send Location", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this,"Send Location", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,send_location.class));
                 break;
             case R.id.share_location_2:
             case R.id.share_location:
@@ -125,6 +150,8 @@ public class MainActivity extends AppCompatActivity
                     edit_status_enabled=false;
 //                    hiding keyboard
                     myKeyboard.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+                    status.setText(status.getText());
+                    editor.putString("my_status",status.getText().toString()).commit();
 
                 }
                 else
@@ -139,6 +166,15 @@ public class MainActivity extends AppCompatActivity
                     status.setSelectAllOnFocus(true);
                     myKeyboard.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
                 }
+                break;
+            case R.id.goto_maps:
+                String strUri = "http://maps.google.com/maps?q=loc:" + last_location.getString("last_latitude","0") + "," + last_location.getString("last_longitude","0") + " (" + "Label which you want" + ")";
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
+
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+
+                startActivity(intent);
+                break;
         }
     }
 }
